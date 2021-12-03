@@ -2,80 +2,216 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="{% static 'css/style.css'%}">
-    <link
-    rel="stylesheet"
-    href="https://unpkg.com/swiper@7/swiper-bundle.min.css"
-    />
-
-    <script src="https://unpkg.com/swiper@7/swiper-bundle.min.js"></script>
-
+{% include 'main_app/head.html' %}
     <title>Document</title>
 </head>
 <body>
     <header>
         <img src="{% static 'img/logo.png' %}" width="120" alt="logo" class="logo">
+    
         <nav>
+            <div id="nav-button">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+              </div>
+            <div class="nav-menu">
             <ul class="nav__links">
                 <li><a href="#">Главная</a></li>
                 <li><a href="#">Аппартаменты</a></li>
                 <li><a href="#">Отзывы</a></li>
                 <li><a href="#">Контакты</a></li>
             </ul>
+            </div>
         </nav>
-        <a href="#" class="cta"><button>+7(800)775-76-74</button></a>
+        <a href="#" class="cta">+7(800)775-76-74</a>
     </header>
     <section>
         <div class="slider">
             <div class="slider__text">
                 <h1>Посуточная аренда квартир <br> в Орехово-Зуево</h1>
+                <h4>Более 15 вариантов размещения для туризма и командировок</h4>
             </div>
         </div>
     </section>
+    <h1 class="apartments-title section-title">Наши апартаменты</h1>
     <div class="container">
     <section id="apartments">
-        <h1>Наши апартаменты</h1>
-        <ul>
-            <li class="apartment-item">
-                <div>
-                    <img src="#" alt="">
-                    <p>Ул. Пушкина, д. 14</p>
-                    <p>2500 Р</p>
-                    <p>Комнат: 2</p>
-                </div>
-            </li>
-            <li class="apartment-item">
-                <div>
-                    <img src="#" alt="">
-                    <p>Ул. Пушкина, д. 14</p>
-                    <p>2500 Р</p>
-                    <p>Комнат: 2</p>
-                </div>
-            </li>
-            <li class="apartment-item">
-                <div>
-                    <img src="#" alt="">
-                    <p>Ул. Пушкина, д. 14</p>
-                    <p>2500 Р</p>
-                    <p>Комнат: 2</p>
-                </div>
-            </li>
-        </ul>
+        <div class="apartments-list">
+            <ul>
+                <li class="apartment-item">
+                    <div class="apartment-item__image">
+                        <img src="https://cf.bstatic.com/xdata/images/hotel/max1024x768/286094367.jpg?k=f45213d06327fd22fb50121d0d35fb6c33ab910a790db23fe818d4059728f434&o=&hp=1" alt="">
+                    </div>
+                    <div class="apartment-item__address">
+                        <h4>ул. Пушкина, д. 14, кв. 12</h4>
+                    </div>
+                    <div class="apartment-item__table">
+                        <table>
+                            <tbody>
+                                <th><span class="th-title">Спальных мест</span>
+                                    <br>
+                                    <span class="th-text">2</span>
+                                </th>
+                                <th><span class="th-title">Кол-во Кол-во комнат</span>
+                                    <br>
+                                    <span class="th-text">2</span>
+                                </th>
+                                <th><span class="th-title">Цена в сутки</span>
+                                    <br>
+                                    <span class="th-text">2000 Р</span>
+                                </th>
+                            </tbody>
+                        </table>
+                    </div>
+                </li>
+                <li class="apartment-item">
+                    <div class="apartment-item__image">
+                        <img src="https://cf.bstatic.com/xdata/images/hotel/max1024x768/286094367.jpg?k=f45213d06327fd22fb50121d0d35fb6c33ab910a790db23fe818d4059728f434&o=&hp=1" alt="">
+                    </div>
+                    <div class="apartment-item__address">
+                        <h4>ул. Пушкина, д. 14, кв. 12</h4>
+                    </div>
+                    <div class="apartment-item__table">
+                        <table>
+                            <tbody>
+                                <th><span class="th-title">Спальных мест</span>
+                                    <br>
+                                    <span class="th-text">2</span>
+                                </th>
+                                <th><span class="th-title">Кол-во комнат</span>
+                                    <br>
+                                    <span class="th-text">2</span>
+                                </th>
+                                <th><span class="th-title">Цена в сутки</span>
+                                    <br>
+                                    <span class="th-text">2000 Р</span>
+                                </th>
+                            </tbody>
+                        </table>
+                    </div>
+                </li>
+                <li class="apartment-item">
+                    <div class="apartment-item__image">
+                        <img src="https://cf.bstatic.com/xdata/images/hotel/max1024x768/286094367.jpg?k=f45213d06327fd22fb50121d0d35fb6c33ab910a790db23fe818d4059728f434&o=&hp=1" alt="">
+                    </div>
+                    <div class="apartment-item__address">
+                        <h4>ул. Пушкина, д. 14, кв. 12</h4>
+                    </div>
+                    <div class="apartment-item__table">
+                        <table>
+                            <tbody>
+                                <th><span class="th-title">Спальных мест</span>
+                                    <br>
+                                    <span class="th-text">2</span>
+                                </th>
+                                <th><span class="th-title">Кол-во комнат</span>
+                                    <br>
+                                    <span class="th-text">2</span>
+                                </th>
+                                <th><span class="th-title">Цена в сутки</span>
+                                    <br>
+                                    <span class="th-text">2000 Р</span>
+                                </th>
+                            </tbody>
+                        </table>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="apartments-button">
+            <a href="#">Посмотреть все варианты</a>
+        </div>
     </section>
+    <h1 class="benefits-title section-title">Почему выбирают нас</h1>
+    <div class="container">
+        <section id="benefits">
+            <ul>
+               <li>
+                   <div class="benefits__number">
+                       <img src="{% static 'img/thumb.svg' %}" alt="">
+                   </div>
+                   <div class="benefits__text">
+                       Гостиничные стандарты качества
+                   </div>
+               </li> 
+               <li>
+                <div class="benefits__number">
+                    <img src="{% static 'img/documents1.svg' %}" alt="">
+                </div>
+                <div class="benefits__text">
+                    Полный комплект документов
+                </div>
+            </li>
+            <li>
+                <div class="benefits__number">
+                    <img src="{% static 'img/price.svg' %}" alt="">
+                </div>
+                <div class="benefits__text">
+                    Доступные цены  
+                </div>
+            </li>
+            <li>
+                <div class="benefits__number">
+                    <img src="{% static 'img/year.svg' %}" alt="">
+                </div>
+                <div class="benefits__text">
+                    Безупречный сервис с 2019 года
+                </div>
+            </li>
+            </ul>
+        </section>
     </div>
+    <h1 class="application-title section-title">Заявка на размещение</h1>
+    <div class="container">
+        <section id="application">
+            <form action="">
+                <div id="send-application">Оставьте заявку, и мы свяжемся с Вами в ближайшее время</div>
+                <div class="form-main">
+                    <div class="dates">
+                        <div class="form-date">
+                            <div><label for="phone">Номер телефона</label></div>
+                            <div><input type="text" name="phone" id="form-phone" placeholder="7(123)456-78-99"></div>
+                        </div>
+                        <div class="form-date">
+                            <div><label for="name">Имя (необязательно)</label></div>
+                            <div><input type="text" name="name" id="form-name" placeholder="Иван"></div>
+                        </div>
+                    </div>
+                    <div class="dates">
+                        <div class="form-date">
+                            <div><label for="startdate">Желаемая дата заеда</label></div>
+                            <div><input type="date" name="startdate" id="startdate"></div>
+                        </div>
+                        <div class="form-date">
+                            <div><label for="enddate">Желаемая дата выезда</label></div>
+                            <div><input type="date" name="enddate" id="enddate"></div>
+                        </div>
+                    </div>
+                    <div class="form-button">
+                        <a href="#">Отправить</a>
+                    </div>
+                </div>
+            </form>
+        </section>
+    </div>
+    </div>
+    {% include 'main_app/footer.html' %}
 </body>
 </html>
 
-<style>
-
-</style>
 
 <script>
-    
+
+    const navButton = document.getElementById("nav-button")
+    const menu = document.getElementsByClassName("nav-menu")[0]
+
+    navButton.addEventListener("click", () => {
+        navButton.classList.toggle("open")
+        menu.classList.toggle("nav-menu-active")
+    })
+
+
+
 </script>

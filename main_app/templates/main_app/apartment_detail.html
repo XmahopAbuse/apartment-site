@@ -1,0 +1,67 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru"
+>
+<head>
+{% include 'main_app/head.html' %}
+<link rel="stylesheet" href="{% static 'node_modules\lightgallery\css\lightgallery-bundle.css' %}">
+<script src="{% static 'node_modules\lightgallery\lightgallery.min.js' %}"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="{% static 'css\lightslider.css' %}">
+<script src="{% static 'js\lightslider.js' %}"></script>
+<title>Document</title>
+</head>
+<body>
+    <header>
+        <img src="{% static 'img/logo.png' %}" width="120" alt="logo" class="logo">
+        <nav>
+            <ul class="nav__links">
+                <li><a href="#">Главная</a></li>
+                <li><a href="#">Аппартаменты</a></li>
+                <li><a href="#">Отзывы</a></li>
+                <li><a href="#">Контакты</a></li>
+            </ul>
+        </nav>
+        <a href="#" class="cta">+7(800)775-76-74</a>
+    </header>
+
+    <section id ="single-apartment">
+        <div class="apartment-image">
+        <ul id="imageGallery">
+            {%for image in images%}
+            <li data-thumb="{{image.photo.url}}" data-src="img/largeImage.jpg">
+              <img src="{{image.photo.url}}" />
+            </li>
+            {%endfor%}
+          </ul>
+        </div>
+
+        <div class="apartment-description">
+            <ul>
+                <li>123</li>
+                <li>23123</li>
+            </ul>
+        </div>
+    </section>
+
+    {% include 'main_app/footer.html' %}
+</body>
+</html>
+
+
+<script>
+    $('#imageGallery').lightSlider({
+        gallery:true,
+        item:1,
+        loop:true,
+        thumbItem:9,
+        slideMargin:0,
+        enableDrag: false,
+        currentPagerPosition:'left',
+        onSliderLoad: function(el) {
+            el.lightGallery({
+                selector: '#imageGallery .lslide'
+            });
+        }   
+    });  
+</script>

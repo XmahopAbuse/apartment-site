@@ -17,6 +17,7 @@ class AppartmentImageInline(admin.TabularInline):
 class AppartmentAdmin(admin.ModelAdmin):
     inlines = [AppartmentImageInline]
     list_display = ('address',)
+    prepopulated_fields = {"url": ("address",)}
 
 
 class ApplicationAdmin(admin.ModelAdmin):

@@ -9,6 +9,8 @@ class Appartment(models.Model):
     price = models.PositiveIntegerField(verbose_name="Цена за сутки")
     descriptiion = models.TextField(max_length=2500, verbose_name="Описание", default=None, blank=True)
     created = models.DateTimeField(auto_now_add=True)
+    url = models.SlugField(verbose_name="URL", max_length=100)
+
     
     class Meta():
         verbose_name = "Аппартаменты"
