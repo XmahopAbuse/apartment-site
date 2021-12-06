@@ -1,0 +1,30 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru"
+>
+<head>
+{% include 'main_app/head.html' %}
+<title>Document</title>
+</head>
+<body>
+    {% include 'main_app/menu.html' %}
+    <h1 class="apartments-title section-title">Наши контакты</h1>
+    <section id="contacts">
+        <div class="our-contacts">
+            <ul> 
+                <li>
+                    <h5>Телефон</h5><br>
+                    <a href="#">8(123)456-89-90</a>
+                </li>
+                <li>
+                    <h5>Телефон</h5><br>
+                    <a href="#">email@domain.com</a>
+                </li>
+                <li>
+                    <h5>Телефон</h5><br>
+                    <a href="#">email@domain.com</a>
+                </li>
+            </ul>
+        </div>
+    </section>
+{% include 'main_app/footer.html' %}

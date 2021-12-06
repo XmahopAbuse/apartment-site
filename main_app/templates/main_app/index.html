@@ -1,32 +1,13 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 <head>
 {% include 'main_app/head.html' %}
     <title>Document</title>
 </head>
 <body>
-    <header>
-        <img src="{% static 'img/logo.png' %}" width="120" alt="logo" class="logo">
-    
-        <nav>
-            <div id="nav-button">
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-              </div>
-            <div class="nav-menu">
-            <ul class="nav__links">
-                <li><a href="#">Главная</a></li>
-                <li><a href="#">Аппартаменты</a></li>
-                <li><a href="#">Отзывы</a></li>
-                <li><a href="#">Контакты</a></li>
-            </ul>
-            </div>
-        </nav>
-        <a href="#" class="cta">+7(800)775-76-74</a>
-    </header>
+    {% include 'main_app/menu.html' %}
     <section>
         <div class="slider">
             <div class="slider__text">
@@ -37,91 +18,44 @@
     </section>
     <h1 class="apartments-title section-title">Наши апартаменты</h1>
     <div class="container">
+        
     <section id="apartments">
         <div class="apartments-list">
             <ul>
+                {% for apartment in apartments %}
                 <li class="apartment-item">
                     <div class="apartment-item__image">
-                        <img src="https://cf.bstatic.com/xdata/images/hotel/max1024x768/286094367.jpg?k=f45213d06327fd22fb50121d0d35fb6c33ab910a790db23fe818d4059728f434&o=&hp=1" alt="">
+                        {%for i in apartment.image %}
+                        <img src="{{i.photo.url}}">
+                        {%endfor%}
                     </div>
                     <div class="apartment-item__address">
-                        <h4>ул. Пушкина, д. 14, кв. 12</h4>
+                        <a href="{%url 'apartment_detail' apartment.url %}"><h4>{{apartment.address}}</h4></a>
                     </div>
                     <div class="apartment-item__table">
                         <table>
                             <tbody>
                                 <th><span class="th-title">Спальных мест</span>
                                     <br>
-                                    <span class="th-text">2</span>
+                                    <span class="th-text">{{apartment.sleeping_place}}</span>
                                 </th>
                                 <th><span class="th-title">Кол-во Кол-во комнат</span>
                                     <br>
-                                    <span class="th-text">2</span>
+                                    <span class="th-text">{{apartment.rooms}}</span>
                                 </th>
                                 <th><span class="th-title">Цена в сутки</span>
                                     <br>
-                                    <span class="th-text">2000 Р</span>
+                                    <span class="th-text">{{apartment.price}} Р</span>
                                 </th>
                             </tbody>
                         </table>
                     </div>
                 </li>
-                <li class="apartment-item">
-                    <div class="apartment-item__image">
-                        <img src="https://cf.bstatic.com/xdata/images/hotel/max1024x768/286094367.jpg?k=f45213d06327fd22fb50121d0d35fb6c33ab910a790db23fe818d4059728f434&o=&hp=1" alt="">
-                    </div>
-                    <div class="apartment-item__address">
-                        <h4>ул. Пушкина, д. 14, кв. 12</h4>
-                    </div>
-                    <div class="apartment-item__table">
-                        <table>
-                            <tbody>
-                                <th><span class="th-title">Спальных мест</span>
-                                    <br>
-                                    <span class="th-text">2</span>
-                                </th>
-                                <th><span class="th-title">Кол-во комнат</span>
-                                    <br>
-                                    <span class="th-text">2</span>
-                                </th>
-                                <th><span class="th-title">Цена в сутки</span>
-                                    <br>
-                                    <span class="th-text">2000 Р</span>
-                                </th>
-                            </tbody>
-                        </table>
-                    </div>
-                </li>
-                <li class="apartment-item">
-                    <div class="apartment-item__image">
-                        <img src="https://cf.bstatic.com/xdata/images/hotel/max1024x768/286094367.jpg?k=f45213d06327fd22fb50121d0d35fb6c33ab910a790db23fe818d4059728f434&o=&hp=1" alt="">
-                    </div>
-                    <div class="apartment-item__address">
-                        <h4>ул. Пушкина, д. 14, кв. 12</h4>
-                    </div>
-                    <div class="apartment-item__table">
-                        <table>
-                            <tbody>
-                                <th><span class="th-title">Спальных мест</span>
-                                    <br>
-                                    <span class="th-text">2</span>
-                                </th>
-                                <th><span class="th-title">Кол-во комнат</span>
-                                    <br>
-                                    <span class="th-text">2</span>
-                                </th>
-                                <th><span class="th-title">Цена в сутки</span>
-                                    <br>
-                                    <span class="th-text">2000 Р</span>
-                                </th>
-                            </tbody>
-                        </table>
-                    </div>
-                </li>
+                {%endfor%}
             </ul>
         </div>
         <div class="apartments-button">
-            <a href="#">Посмотреть все варианты</a>
+            <a href="{%url 'apartments'%}">Посмотреть все варианты</a>
         </div>
     </section>
     <h1 class="benefits-title section-title">Почему выбирают нас</h1>
@@ -166,31 +100,34 @@
     <h1 class="application-title section-title">Заявка на размещение</h1>
     <div class="container">
         <section id="application">
-            <form action="">
+            <form id ="application-form">
+                {% csrf_token %}
+                
                 <div id="send-application">Оставьте заявку, и мы свяжемся с Вами в ближайшее время</div>
                 <div class="form-main">
                     <div class="dates">
                         <div class="form-date">
                             <div><label for="phone">Номер телефона</label></div>
-                            <div><input type="text" name="phone" id="form-phone" placeholder="7(123)456-78-99"></div>
+                            {{form.phone}}
                         </div>
                         <div class="form-date">
                             <div><label for="name">Имя (необязательно)</label></div>
-                            <div><input type="text" name="name" id="form-name" placeholder="Иван"></div>
+                            {{form.name}}
                         </div>
                     </div>
                     <div class="dates">
                         <div class="form-date">
-                            <div><label for="startdate">Желаемая дата заеда</label></div>
-                            <div><input type="date" name="startdate" id="startdate"></div>
+                            <div><label for="date_start">Желаемая дата заеда</label></div>
+                            {{form.date_start}}
                         </div>
                         <div class="form-date">
                             <div><label for="enddate">Желаемая дата выезда</label></div>
-                            <div><input type="date" name="enddate" id="enddate"></div>
+                            {{form.date_end}}
                         </div>
                     </div>
+                    <div id="result"></div>
                     <div class="form-button">
-                        <a href="#">Отправить</a>
+                        <input type="submit" value="Отправить">
                     </div>
                 </div>
             </form>
@@ -201,17 +138,36 @@
 </body>
 </html>
 
-
 <script>
 
-    const navButton = document.getElementById("nav-button")
-    const menu = document.getElementsByClassName("nav-menu")[0]
-
-    navButton.addEventListener("click", () => {
-        navButton.classList.toggle("open")
-        menu.classList.toggle("nav-menu-active")
+    $("#application-form").submit(function (e) {
+        e.preventDefault();
+        var serializedData = $(this).serialize();
+        console.log(serializedData)
+        $.ajax({
+            type: 'POST',
+            url: "{% url 'application' %}",
+            data: serializedData,
+            success: function (response) {
+                document.getElementById('application-form').reset();
+                document.getElementById('result').innerHTML = "Ваше сообщение успешно отправлено. Мы свяжемся с Вами в ближайшее время."
+            },
+            error: function (response) {
+                document.getElementById('result').innerHTML = "Произошла ошибка при отправке формы. Попробуйте еще раз."
+            }
+        })
     })
 
+</script>
 
-
+<script>
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+    
+            document.querySelector(this.getAttribute('href')).scrollIntoView({
+                behavior: 'smooth'
+            });
+        });
+    });
 </script>

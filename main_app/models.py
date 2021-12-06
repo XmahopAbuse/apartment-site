@@ -10,6 +10,7 @@ class Appartment(models.Model):
     descriptiion = models.TextField(max_length=2500, verbose_name="Описание", default=None, blank=True)
     created = models.DateTimeField(auto_now_add=True)
     url = models.SlugField(verbose_name="URL", max_length=100)
+    show_in_main = models.BooleanField(verbose_name="Отображать на главной", default=False)
 
     
     class Meta():
@@ -31,10 +32,11 @@ class AppartmentImage(models.Model):
             return '(No image)'
 
 class Application(models.Model):
-    address = models.CharField(max_length=300, verbose_name="Адрес")
+    address = models.CharField(max_length=300, verbose_name="Адрес", blank=True, default=None, null=True)
     phone = models.CharField(max_length=20, verbose_name="Номер телефона")
-    date_start = models.DateTimeField(verbose_name="Дата заезда", blank=True, default=None, null=True)
-    date_end = models.DateTimeField(verbose_name="Дата выезда", blank=True, default=None, null=True)
+    name = models.CharField(verbose_name="Имя", max_length=100, default=None, blank=True)
+    date_start = models.DateField(verbose_name="Дата заезда", blank=True, default=None, null=True)
+    date_end = models.DateField(verbose_name="Дата выезда", blank=True, default=None, null=True)
 
     class Meta():
         verbose_name = "Заявка"

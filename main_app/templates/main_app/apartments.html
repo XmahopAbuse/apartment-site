@@ -1,0 +1,33 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru"
+>
+<head>
+{% include 'main_app/head.html' %}
+<title>Document</title>
+</head>
+<body>
+    {% include 'main_app/menu.html' %}
+    <section id="apartment-list">
+        {%for apartment in apartments%}
+            <div class="apartment-list-item">
+                <div class="apartment-list-item-image">
+                    {%for i in apartment.image %}
+                    <img src="{{i.photo.url}}">
+                    {%endfor%}
+                </div>
+                <div class="apartment-list-item-text">
+                    <ul>
+                        <li><b>Адрес:</b> {{apartment.address}}</li>
+                        <li><b>Количество комнат:</b> {{apartment.rooms}}</li>
+                        <li><b>Спальных мест:</b> {{apartment.sleeping_place}}</li>
+                        <li><b>Этаж:</b> {{apartment.floor}}</li>
+                    </ul>
+                    <div class="apartments-button" style="text-align: left; padding-bottom: 20px;">
+                        <a href="{%url 'apartment_detail' apartment.url %}">Подробнее</a>
+                    </div>
+                </div>
+            </div>
+        {%endfor%}
+    </section>
+</body>

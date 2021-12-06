@@ -8,31 +8,11 @@
 <script src="{% static 'node_modules\lightgallery\lightgallery.min.js' %}"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 <link rel="stylesheet" href="{% static 'css\lightslider.css' %}">
-<script src="{% static 'js\lightslider.js' %}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/5.5.2/bootbox.min.js" integrity="sha512-RdSPYh1WA6BF0RhpisYJVYkOyTzK4HwofJ3Q7ivt/jkpW6Vc8AurL1R+4AUcvn9IwEKAPm/fk7qFZW3OuiUDeg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script><script src="{% static 'js\lightslider.js' %}"></script>
 <title>Document</title>
 </head>
 <body>
-    <header>
-        <img src="{% static 'img/logo.png' %}" width="120" alt="logo" class="logo">
-    
-        <nav>
-            <div id="nav-button">
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-              </div>
-            <div class="nav-menu">
-            <ul class="nav__links">
-                <li><a href="#">Главная</a></li>
-                <li><a href="#">Аппартаменты</a></li>
-                <li><a href="#">Отзывы</a></li>
-                <li><a href="#">Контакты</a></li>
-            </ul>
-            </div>
-        </nav>
-        <a href="#" class="cta">+7(800)775-76-74</a>
-    </header>
+    {% include 'main_app/menu.html' %}
 
     <section id ="single-apartment">
         <div class="apartment-image">
@@ -47,9 +27,19 @@
 
         <div class="apartment-description">
             <ul>
-                <li>123</li>
-                <li>23123</li>
+                <li><b>Адрес:</b> {{apartment.address}}</li>
+                <li><b>Количество комнат:</b> {{apartment.rooms}}</li>
+                <li><b>Этаж:</b> {{apartment.floor}}</li>
+                <li><b>Спальных мест:</b> {{apartment.sleeping_place}}</li>
+                <li><b>Цена за сутки:</b> {{apartment.price}}</li>
             </ul>
+            
+            {% if apartment.descriptiion %}
+            <p>{{apartment.descriptiion}}</p>             
+            {% endif %}
+            <div class="apartments-button" style="text-align: left; padding-left: 40px;">
+                <a id="application-button" href="#">Забронировать</a>
+            </div>
         </div>
     </section>
 
@@ -68,4 +58,85 @@
         enableDrag: false,
         currentPagerPosition:'left',
     });  
+</script>
+
+
+
+<!-- The Modal -->
+<div id="myModal" class="modal">
+
+    <!-- Modal content -->
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <form id ="application-form-detail">
+        {% csrf_token %}
+        <label for="phone">Номер телефона</label>
+        {{form.phone}}
+        <label for="name">Имя (необязательно)</label>
+        {{form.name}}
+
+        <label for="date_start">Желаемая дата заеда</label>
+        {{form.date_start}}
+
+        <label for="enddate">Желаемая дата выезда</label>
+        {{form.date_end}}
+        <div id="result"></div>
+            <div class="form-button">
+                <input type="submit" value="Отправить">
+            </div>
+        </div>
+    </form>
+    </div>
+  
+</div>
+
+<script>
+// Get the modal
+var modal = document.getElementById("myModal");
+
+// Get the button that opens the modal
+var btn = document.getElementById("application-button");
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks on the button, open the modal
+btn.onclick = function(e) {
+  e.preventDefault();
+  modal.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+  modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+} 
+</script>
+
+<script>
+
+    $("#application-form-detail").submit(function (e) {
+        e.preventDefault();
+        var serializedData = $(this).serialize();
+        console.log(serializedData)
+        $.ajax({
+            type: 'POST',
+            url: "{% url 'application' %}",
+            data: serializedData,
+            success: function (response) {
+                document.getElementById('application-form-detail').reset();
+                document.getElementById('result').innerHTML = "Ваше сообщение успешно отправлено. Мы свяжемся с Вами в ближайшее время."
+            },
+            error: function (response) {
+                document.getElementById('result').innerHTML = "Произошла ошибка при отправке формы. Попробуйте еще раз."
+            }
+        })
+    })
+
 </script>
